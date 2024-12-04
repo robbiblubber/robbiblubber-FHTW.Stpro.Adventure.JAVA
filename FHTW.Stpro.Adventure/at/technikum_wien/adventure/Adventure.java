@@ -660,7 +660,7 @@ public final class Adventure
             }
         }
 
-        for(int i = 0; i < 60; i++)
+        for(int i = 0; i < 60; i++)                                             // leave some coins
         {
             dungeon[rnd.nextInt(dungeon.length)][rnd.nextInt(dungeon[0].length)].coins += rnd.nextInt(8);
         }
@@ -680,6 +680,11 @@ public final class Adventure
             else { w = new Weapon("hammer", 16); }
 
             dungeon[rnd.nextInt(dungeon.length)][rnd.nextInt(dungeon[0].length)].item = w;
+        }
+
+        for(int i = 0; i < 3; i++)                                              // add 3 exits
+        {
+            dungeon[rnd.nextInt(dungeon.length)][rnd.nextInt(dungeon[0].length)].isExit = true;
         }
 
         do
