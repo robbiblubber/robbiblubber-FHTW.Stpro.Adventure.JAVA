@@ -69,6 +69,8 @@ public final class Adventure
             default: System.out.println();
         }
 
+        giveDirections();
+
         if(f.hasWell)                                                           // heal if well is available
         {
             if(player.health < 230)
@@ -233,6 +235,51 @@ public final class Adventure
         if(player.health < 1)                                                   // find out if player eventually died
         {
             System.out.println("You died.");
+        }
+    }
+
+
+    /** Scans the vicinity and print sensations. */
+    private static void giveDirections()
+    {
+        Direction[] dirs = new Direction[] { Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST };
+        for(Direction i: dirs)
+        {                                                                       // look in all directions
+            Point p = locationAt(i);
+            Field f = dungeon[p.x][p.y];
+            if(f.foe != null)
+            {                                                                   // foe in neighbouring field
+                switch(rnd.nextInt(8))
+                {
+                    case 1:
+                        System.out.printf("To the %s you can see a %s.\n", parse(i), f.foe.name);
+                        break;
+                    case 2:
+                        System.out.printf("There seems to be a creature to the %s.\n", parse(i));
+                        break;
+                    case 3:
+                        System.out.printf("Something is moving to the %s.\n", parse(i));
+                        break;
+                    case 4:
+                        System.out.printf("You hear noises from the %s.\n", parse(i));
+                        break;
+                }
+            }
+
+            if((f.coins > 0) && (rnd.nextInt(4) == 0))
+            {                                                                   // sense money
+                System.out.printf("There seems to be something shiny the %s.\n", parse(i));
+            }
+
+            if(f.isExit && (rnd.nextInt(4) == 0))
+            {
+                System.out.printf("You feel a wisp of wind coming from the %s.\n", parse(i));
+            }
+
+            if(f.isExit && (rnd.nextInt(5) == 0))
+            {
+                System.out.printf("You see a strange glow coming from the %s.\n", parse(i));
+            }
         }
     }
 
