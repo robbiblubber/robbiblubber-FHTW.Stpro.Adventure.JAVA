@@ -276,7 +276,7 @@ public final class Adventure
                 System.out.printf("You feel a wisp of wind coming from the %s.\n", parse(i));
             }
 
-            if(f.isExit && (rnd.nextInt(5) == 0))
+            if(f.hasWell && (rnd.nextInt(5) == 0))
             {
                 System.out.printf("You see a strange glow coming from the %s.\n", parse(i));
             }
